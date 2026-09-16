@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#fffaf5" />
+  <meta name="description" content="먹어도 돼? 알레르기 식품 탐색 모바일 웹 프로토타입" />
+  <title>먹어도 돼? · 프로토타입</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="prototype-label" aria-hidden="true">
+    <strong>화면 설계 시안</strong>
+    <span>기능·데이터 검증용 로컬 프로토타입</span>
+  </div>
+  <main class="phone" aria-label="먹어도 돼? 모바일 프로토타입">
+    <div class="notch" aria-hidden="true"></div>
+    <header class="app-header">
+      <button class="brand" data-go="home" aria-label="검색 홈으로 이동">먹어도 돼?</button>
+      <span class="screen-code" id="screenCode">SCR-HOME-001</span>
+      <button class="header-action" id="authAction" data-go="login">로그인</button>
+    </header>
+    <div class="screen" id="app" tabindex="-1"></div>
+    <nav class="bottom-nav" aria-label="주요 메뉴">
+      <button data-go="home" data-nav="home"><span class="nav-icon" data-icon="search"></span><span>검색</span></button>
+      <button data-go="card" data-nav="card"><span class="nav-icon" data-icon="card"></span><span>카드</span></button>
+      <button data-go="profile" data-nav="profile"><span class="nav-icon" data-icon="user"></span><span>내 정보</span></button>
+    </nav>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
