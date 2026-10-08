@@ -40,14 +40,14 @@ try {
   }
   async function search(q){await page.getByRole('textbox',{name:'제품 검색',exact:true}).fill(q);await page.locator('#searchForm button').click();await page.getByRole('heading',{name:'검색 결과',exact:true}).waitFor();}
   await go('home');
-  check('실제 상품 추천: 검증되지 않은 7개 제외',await fullRecommendationIds(),[]);
+  check('실제 상품 추천: 제조환경 미확인 맛밤 제외',await fullRecommendationIds(),['p02','p03','real-ohgamja-35','real-shrimp-90','real-sun-48','real-turtle-49']);
   await go('all-products');
-  check('기존 목록 7개 보존',await page.locator('.product-list [data-product]').count(),7);
-  check('기존 상품 전부 정보 미확인',await page.locator('.badge.unknown').count(),7);
+  check('실제 상품 7개',await page.locator('.product-list [data-product]').count(),7);
+  check('제조환경 미확인 맛밤 1개',await page.locator('.badge.unknown').count(),1);
   await page.locator('[data-product="p03"]').click();
   await page.getByRole('heading',{name:'제품 근거·상세',exact:true}).waitFor();
-  check('포테토칩 밀 기록은 검증되지 않은 기존 시연 기록으로 표시',(await page.locator('#app').innerText()).includes('기존 시연 기록 · 검증되지 않음'),true);
-  check('상세 빈 직접 함유를 없음으로 단정하지 않음',(await page.locator('#app').innerText()).includes('빈 기록으로 무함유를 판단할 수 없음'),true);
+  check('포테토칩 실제 직접 함유 표시',(await page.locator('#app').innerText()).includes('대두 함유'),true);
+  check('상품 출처 링크',await page.getByRole('link',{name:'컬리 상품 상세 열기 ↗'}).getAttribute('href'),'https://www.kurly.com/goods/1002129073');
   await go('home');
   await page.getByLabel('가상 테스트 상품 보기',{exact:true}).check();
   check('홈 추천 최대 3개',await page.locator('.rec-list [data-product]').count(),3);
@@ -106,9 +106,9 @@ try {
   await page.getByRole('button',{name:'전체 보기',exact:true}).click();
   check('카테고리 초기화',await page.locator('.product-list [data-product]').count(),22);
   await page.getByLabel('가상 테스트 상품 보기').uncheck();
-  check('일반 모드에 가상 상품 혼입 없음',await ids('.product-list [data-product]'),['p01','p02','p03','p04','p05','p06','p07']);
+  check('일반 모드에 가상 상품 혼입 없음',await ids('.product-list [data-product]'),['p01','p02','p03','real-ohgamja-35','real-shrimp-90','real-sun-48','real-turtle-49']);
   await go('home');await search('밀 표시 없는 과자');
-  check('기존 밀 제조환경 시연 기록도 명시적 제외 적용',await ids('.result-group [data-product]'),['p02','p04']);
+  check('실제 밀 직접 함유와 제조환경 모두 검색 제외',await ids('.result-group [data-product]'),[]);
   check('실제 미확인 상품을 비교 완료 영역으로 표시하지 않음',await page.locator('[data-result-group="compared"]').count(),0);
   await search('포카칩');check('실제 브랜드 이름 검색',await ids('.result-group [data-product]'),['p02']);
   await go('profile');await page.getByRole('button',{name:'약물·이상반응',exact:true}).click();
