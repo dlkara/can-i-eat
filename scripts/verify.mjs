@@ -29,9 +29,18 @@ try {
     check(`UI 저장: ${selected.join('·')||'없음'}`,saved,[...selected].sort((a,b)=>allergens.indexOf(a)-allergens.indexOf(b)));
     await go('home');
   }
+  async function fullRecommendationIds(){
+    if(await page.locator('.recommendation-all').count()===0)return [];
+    await page.locator('.recommendation-all').click();
+    await page.getByRole('heading',{name:'알레르기 기준 추천 후보',exact:true}).waitFor();
+    const result=await ids('.rec-list [data-product]');
+    await page.getByRole('button',{name:'이전 화면',exact:true}).click();
+    await page.getByRole('heading',{name:'오늘 먹을 간식, 표시부터 확인해보세요.',exact:true}).waitFor();
+    return result;
+  }
   async function search(q){await page.getByRole('textbox',{name:'제품 검색',exact:true}).fill(q);await page.locator('#searchForm button').click();await page.getByRole('heading',{name:'검색 결과',exact:true}).waitFor();}
   await go('home');
-  check('실제 상품 추천: 검증되지 않은 7개 제외',await ids('.rec-list [data-product]'),[]);
+  check('실제 상품 추천: 검증되지 않은 7개 제외',await fullRecommendationIds(),[]);
   await go('all-products');
   check('기존 목록 7개 보존',await page.locator('.product-list [data-product]').count(),7);
   check('기존 상품 전부 정보 미확인',await page.locator('.badge.unknown').count(),7);
@@ -41,20 +50,23 @@ try {
   check('상세 빈 직접 함유를 없음으로 단정하지 않음',(await page.locator('#app').innerText()).includes('빈 기록으로 무함유를 판단할 수 없음'),true);
   await go('home');
   await page.getByLabel('가상 테스트 상품 보기',{exact:true}).check();
-  check('가상 모드 추천 기준선 21개',await ids('.rec-list [data-product]'),[...allKnown].sort());
+  check('홈 추천 최대 3개',await page.locator('.rec-list [data-product]').count(),3);
+  check('홈 추천 공통 안내 1회',await page.locator('.recommendation-notice').count(),1);
+  check('추천 카드 반복 설명 제거',await page.locator('.rec-list .product p').count(),0);
+  check('가상 모드 추천 기준선 21개',await fullRecommendationIds(),[...allKnown].sort());
   check('미확인 테스트 상품 추천 제외',await page.locator('.rec-list [data-product="test-unknown"]').count(),0);
   check('모든 추천명에 가상 테스트 상품 표기',await page.locator('.rec-list .product h3').evaluateAll(ns=>ns.every(n=>n.textContent.includes('가상 테스트 상품'))),true);
   for(let i=0;i<allergens.length;i++){
     const a=allergens[i];await saveAllergies([a]);
     const excluded=[`test-direct-${i}`,...(a==='밀'?['test-facility-wheat']:a==='새우'?['test-facility-shrimp']:[])];
-    check(`19종 추천 필터: ${a}`,await ids('.rec-list [data-product]'),allKnown.filter(id=>!excluded.includes(id)).sort());
+    check(`19종 추천 필터: ${a}`,await fullRecommendationIds(),allKnown.filter(id=>!excluded.includes(id)).sort());
   }
   await saveAllergies(['밀','새우']);
-  check('복수 선택 추천: 17개',await page.locator('.rec-list [data-product]').count(),17);
+  check('복수 선택 추천: 17개',Number(await page.locator('[data-rec-count]').innerText()),17);
   await page.reload();
   check('새로고침: 저장 알레르기 유지',await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).foodAllergies,key),['밀','새우']);
   check('새로고침: 가상 모드 유지',await page.getByLabel('가상 테스트 상품 보기').isChecked(),true);
-  check('새로고침: 추천 유지',await page.locator('.rec-list [data-product]').count(),17);
+  check('새로고침: 추천 유지',Number(await page.locator('[data-rec-count]').innerText()),17);
   await search('과자');
   check('검색 저장 항목 경고 별도 표시',await ids('[data-result-group="warnings"] [data-product]'),['test-direct-5','test-direct-8','test-facility-shrimp','test-facility-wheat'].sort());
   check('제조환경 경고 상태 표기',await page.locator('[data-result-group="warnings"] .badge.warn').count(),2);
@@ -83,7 +95,7 @@ try {
   await saveAllergies(allergens);
   check('모든 항목 선택: 추천 빈 결과',await page.getByRole('heading',{name:'추천 후보가 없습니다',exact:true}).isVisible(),true);
   await saveAllergies([]);
-  check('선택 해제: 추천 후보 복원',await page.locator('.rec-list [data-product]').count(),21);
+  check('선택 해제: 추천 후보 복원',Number(await page.locator('[data-rec-count]').innerText()),21);
   for(let i=0;i<allergens.length;i++){
     const a=allergens[i];await search(`제외: ${a}`);
     const excluded=[`test-direct-${i}`,...(a==='밀'?['test-facility-wheat']:a==='새우'?['test-facility-shrimp']:[])];
@@ -108,7 +120,7 @@ try {
   await go('privacy');check('로컬 저장 고지 유지',(await page.locator('#app').innerText()).includes('서버 전송 및 제3자 제공이 없습니다'),true);
   for(const viewport of [{width:390,height:844},{width:1440,height:900},{width:320,height:700}]){
     await page.setViewportSize(viewport);
-    for(const route of ['home','all-products','results','detail','profile']){
+    for(const route of ['home','recommendations','all-products','results','detail','profile']){
       await go(route);
       check(`화면 폭: ${viewport.width} ${route}`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth&&document.querySelector('#app').scrollWidth<=document.querySelector('#app').clientWidth),true);
     }
