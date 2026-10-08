@@ -7,6 +7,7 @@ const { chromium } = require('/Users/hjlee/.cache/codex-runtimes/codex-primary-r
 const base = 'http://127.0.0.1:4173/';
 const allergens = ['난류','우유','메밀','땅콩','대두','밀','고등어','게','새우','돼지고기','복숭아','토마토','아황산류','호두','닭고기','쇠고기','오징어','조개류','잣'];
 const allKnown = [...allergens.map((_,i)=>`test-direct-${i}`),'test-facility-wheat','test-facility-shrimp'];
+const realIds=['p01','p02','p03','real-sun-48','real-turtle-49','real-ohgamja-35','real-shrimp-90','real-potatosnack-250','real-honeytwist-300','real-spicyshrimp-400','real-squid-260','real-jagalchi-300','real-ricesnack-320','real-postick-280','real-doctor-energy-40','real-doctor-protein-50','real-chocopie-468','real-pocari-1500','real-barley-500','real-selex-nuts-50'];
 const key = 'meogeodoDwaePrototypeV3';
 const checks = [], errors = [];
 function check(name, actual, expected) { assert.deepEqual(actual, expected, name); checks.push(name); }
@@ -40,10 +41,10 @@ try {
   }
   async function search(q){await page.getByRole('textbox',{name:'제품 검색',exact:true}).fill(q);await page.locator('#searchForm button').click();await page.getByRole('heading',{name:'검색 결과',exact:true}).waitFor();}
   await go('home');
-  check('실제 상품 추천: 제조환경 미확인 맛밤 제외',await fullRecommendationIds(),['p02','p03','real-ohgamja-35','real-shrimp-90','real-sun-48','real-turtle-49']);
+  check('실제 상품 추천: 미확인 2개 제외',await fullRecommendationIds(),realIds.filter(id=>!['p01','real-pocari-1500'].includes(id)).sort());
   await go('all-products');
-  check('실제 상품 7개',await page.locator('.product-list [data-product]').count(),7);
-  check('제조환경 미확인 맛밤 1개',await page.locator('.badge.unknown').count(),1);
+  check('실제 상품 20개',await page.locator('.product-list [data-product]').count(),20);
+  check('제조환경 미확인 2개',await page.locator('.badge.unknown').count(),2);
   await page.locator('[data-product="p03"]').click();
   await page.getByRole('heading',{name:'제품 근거·상세',exact:true}).waitFor();
   check('포테토칩 실제 직접 함유 표시',(await page.locator('#app').innerText()).includes('대두 함유'),true);
@@ -106,7 +107,7 @@ try {
   await page.getByRole('button',{name:'전체 보기',exact:true}).click();
   check('카테고리 초기화',await page.locator('.product-list [data-product]').count(),22);
   await page.getByLabel('가상 테스트 상품 보기').uncheck();
-  check('일반 모드에 가상 상품 혼입 없음',await ids('.product-list [data-product]'),['p01','p02','p03','real-ohgamja-35','real-shrimp-90','real-sun-48','real-turtle-49']);
+  check('일반 모드에 가상 상품 혼입 없음',await ids('.product-list [data-product]'),[...realIds].sort());
   await go('home');await search('밀 표시 없는 과자');
   check('실제 밀 직접 함유와 제조환경 모두 검색 제외',await ids('.result-group [data-product]'),[]);
   check('실제 미확인 상품을 비교 완료 영역으로 표시하지 않음',await page.locator('[data-result-group="compared"]').count(),0);

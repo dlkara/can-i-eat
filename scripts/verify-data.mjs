@@ -9,27 +9,34 @@ const read=expression=>JSON.parse(vm.runInContext(`JSON.stringify(${expression})
 const result=[];
 function check(name,actual,expected){assert.deepEqual(actual,expected,name);result.push({name,actual});}
 const records=read('PRODUCTS');
-check('실제 상품 7개',records.length,7);
-check('함유·제조환경 모두 확인 6개',read('PRODUCTS.filter(hasEvidence).length'),6);
+check('실제 상품 총 20개',records.length,20);
+check('함유·제조환경 모두 확인 18개',read('PRODUCTS.filter(hasEvidence).length'),18);
 check('맛밤 제조환경 미확인',records.find(p=>p.id==='p01').facilityStatus,'UNKNOWN');
-for(const p of records){assert.equal(new URL(p.sourceUrl).hostname,'www.kurly.com');assert.ok(p.labelUrl);assert.equal(p.checkedAt,'2026-10-08');assert.ok(/\d+g/.test(p.name));}
+for(const p of records){assert.equal(new URL(p.sourceUrl).hostname,'www.kurly.com');assert.ok(p.labelUrl);assert.equal(p.checkedAt,'2026-10-08');assert.ok(/\d+(?:\.\d+)?(?:g|mL|L)/.test(p.name));}
 check('포테토칩 실제 직접 함유',records.find(p=>p.id==='p03').direct,['대두']);
 check('포카칩 표시 함유',records.find(p=>p.id==='p02').direct,['우유','대두']);
 check('새우깡 표시 함유',records.find(p=>p.id==='real-shrimp-90').direct,['밀','새우','대두','우유']);
-check('미등록 시 맛밤 제외',read('recommendationCandidates().map(p=>p.id)'),records.filter(p=>p.id!=='p01').map(p=>p.id));
+check('미등록 시 맛밤·포카리스웨트 제외',read('recommendationCandidates().map(p=>p.id)'),records.filter(p=>!['p01','real-pocari-1500'].includes(p.id)).map(p=>p.id));
 context.state.foodAllergies=['복숭아'];
-check('복숭아 저장: 제조환경 제외 후 두 후보',read('recommendationCandidates().map(p=>p.id)'),['p03','real-shrimp-90']);
+check('복숭아 저장: 제조환경 제외 후 후보 9개',read('recommendationCandidates().map(p=>p.id)'),['p03','real-shrimp-90','real-potatosnack-250','real-honeytwist-300','real-spicyshrimp-400','real-squid-260','real-jagalchi-300','real-ricesnack-320','real-postick-280']);
 context.state.foodAllergies=['우유'];
-check('우유 저장: 직접 함유 5개와 제조환경 1개 제외',read('recommendationCandidates().length'),0);
+check('우유 저장: 직접 함유와 제조환경 전부 제외',read('recommendationCandidates().length'),0);
 context.state.foodAllergies=['메밀'];
-check('메밀 저장: 해당 표시 없는 후보 6개',read('recommendationCandidates().length'),6);
+check('메밀 저장: 셀렉스 제조환경 제외 후 후보 17개',read('recommendationCandidates().length'),17);
 check('밀 제외 과자: 직접 함유·제조환경 모두 제외',read('searchProducts("밀 없는 과자").items.length'),0);
 check('새우 제외 과자: 직접 함유·제조환경 모두 제외',read('searchProducts("제외: 새우 과자").items.length'),0);
-check('밀 제외 전체: 맛밤은 충족 미확인으로 별도 남김',read('searchProducts("밀 없는 간식").items.map(p=>p.id)'),['p01']);
+check('밀 제외 전체: 셀렉스와 미확인 2개 표시',read('searchProducts("밀 없는 간식").items.map(p=>p.id)'),['p01','real-pocari-1500','real-selex-nuts-50']);
 check('포카칩 이름 검색',read('searchProducts("포카칩").items.map(p=>p.id)'),['p02']);
 check('검색 빈 결과',read('searchProducts("없는제품명XYZ").items.length'),0);
+check('일반 데이터 중복 ID 없음',new Set(records.map(p=>p.id)).size,20);
+check('미확인 상품 두 개',read('PRODUCTS.filter(p=>!hasEvidence(p)).map(p=>p.id)'),['p01','real-pocari-1500']);
+check('새 단백질바 닭고기 표시 반영',records.find(p=>p.id==='real-doctor-protein-50').direct,['우유','대두','땅콩','닭고기']);
+check('보리차 제조환경 아황산류 반영',records.find(p=>p.id==='real-barley-500').facility.includes('아황산류'),true);
+check('실제 에너지바 카테고리 3개',read('searchProducts("에너지바").items.length'),3);
+check('실제 이온음료 카테고리 1개',read('searchProducts("이온음료").items.length'),1);
+check('알레르기 표준 항목 외 임의 매핑 없음',read('PRODUCTS.every(p=>[...p.direct,...p.facility].every(a=>ALLERGENS.includes(a)))'),true);
 context.state.testMode=true;context.state.foodAllergies=['밀','새우'];
 check('별도 가상 모드 유지',read('recommendationCandidates().length'),17);
 check('가상 22개 실제 상품 혼입 없음',read('catalog().every(p=>p.isTest)'),true);
-fs.mkdirSync('artifacts/qa',{recursive:true});fs.writeFileSync('artifacts/qa/real-data-logic.json',JSON.stringify({checks:result.length,results:result},null,2));
+fs.mkdirSync('artifacts/qa',{recursive:true});fs.writeFileSync('artifacts/qa/products20-logic.json',JSON.stringify({checks:result.length,results:result},null,2));
 console.log(`${result.length}개 실제 데이터·필터 검증 통과`);
