@@ -695,5 +695,114 @@ const PRODUCTS=[
     "sourceUrl": "https://www.kurly.com/goods/1000135038",
     "labelUrl": "https://img-cf.kurly.com/hdims/resize/%3E1010x/quality/90/src/shop/data/goodsview/20250204/gv20001637822_1.jpg",
     "sourceScope": "프로틴바 너츠맛 50g × 6개입 표시 이미지"
+  },
+  {
+    "id": "real-madegood-choc-bar-24",
+    "name": "MadeGood 초콜릿칩 그래놀라바 24g (미국 표시)",
+    "manufacturer": "MadeGood",
+    "category": "에너지바",
+    "verificationStatus": "VERIFIED",
+    "directStatus": "REVIEWED",
+    "facilityStatus": "REVIEWED",
+    "checkedAt": "2026-10-10",
+    "direct": [
+      "토마토"
+    ],
+    "facility": [
+      "토마토"
+    ],
+    "facilityUnknown": [
+      "메밀",
+      "돼지고기",
+      "복숭아",
+      "아황산류",
+      "닭고기",
+      "쇠고기",
+      "오징어",
+      "조개류"
+    ],
+    "ingredients": "Pure Gluten Free Oats*, Agave Syrup*, Chocolate Chips* (Cane Sugar*, Unsweetened Chocolate*, Cocoa Butter*), Brown Rice Syrup*, Sunflower Oil*, Invert Cane Syrup*, Brown Rice Crisps*, Vegetable Extracts (Spinach, Broccoli, Carrots, Tomatoes, Beets, Shiitake Mushrooms), Natural Flavor*, Agar*, Salt. *Organic",
+    "ingredientsIsSummary": false,
+    "directLabel": "원재료 목록에 토마토 추출물 포함 · 밀 원재료 없음(제조사 밀 제외 안내와 함께 확인)",
+    "facilityLabel": "제조사 FAQ: 밀·우유·난류·대두·땅콩·견과류·생선·갑각류 등을 제외한 전용 시설. 그 외 원재료는 공유 장비로 가공될 수 있음. 다른 상품의 토마토 추출물 사용을 확인했으며 토마토 제조환경으로 반영.",
+    "sourceName": "MadeGood 미국 공식 상품 페이지 · 제조사 알레르기 FAQ",
+    "sourceUrl": "https://www.madegoodfoods.com/products/chocolate-chip-granola-bars",
+    "labelUrl": "https://www.madegoodfoods.com/products/chocolate-chip-granola-bars",
+    "facilitySourceUrl": "https://madegoodfoods.zendesk.com/hc/en-us/articles/16944156618011-I-have-food-sensitivities-not-included-in-the-Top-9-Can-I-still-enjoy-MadeGood-snacks",
+    "sourceScope": "미국 공식 페이지의 1개/1봉 24g 정보. 국내 판매·수입 라벨은 미확인입니다. 제조사 Top 9 제외 안내 범위 밖의 제조환경은 미확인으로 구분합니다.",
+    "facilityIngredientSourceUrl": "https://www.madegoodfoods.com/products/chocolate-chip-granola-bars",
+    "wheatEvidence": "원재료의 밀 미사용과 제조사 FAQ의 밀 제외 전용 시설 안내를 확인했습니다. 실물 검사나 밀 0% 인증을 뜻하지 않습니다."
+  },
+  {
+    "id": "real-madegood-berry-bar-24",
+    "name": "MadeGood 믹스드베리 그래놀라바 24g (미국 표시)",
+    "manufacturer": "MadeGood",
+    "category": "에너지바",
+    "verificationStatus": "VERIFIED",
+    "directStatus": "REVIEWED",
+    "facilityStatus": "REVIEWED",
+    "checkedAt": "2026-10-10",
+    "direct": [
+      "토마토"
+    ],
+    "facility": [
+      "토마토"
+    ],
+    "facilityUnknown": [
+      "메밀",
+      "돼지고기",
+      "복숭아",
+      "아황산류",
+      "닭고기",
+      "쇠고기",
+      "오징어",
+      "조개류"
+    ],
+    "ingredients": "Pure Gluten Free Oats*, Agave Syrup*, Brown Rice Syrup*, Brown Rice Crisps*, Sunflower Oil*, Invert Cane Syrup*, Raisins*, Gluten Free Oat Flour*, Dried Cranberries* (Apple Juice Concentrate*, Cranberries*, Sunflower Oil*), Zante Currants*, Freeze Dried Raspberries*, Vegetable Extracts (Spinach, Broccoli, Carrots, Tomatoes, Beets, Shiitake Mushrooms), Natural Flavor*, Agar*, Salt. *Organic.",
+    "ingredientsIsSummary": false,
+    "directLabel": "원재료 목록에 토마토 추출물 포함 · 밀 원재료 없음(제조사 밀 제외 안내와 함께 확인)",
+    "facilityLabel": "제조사 FAQ: 밀·우유·난류·대두·땅콩·견과류·생선·갑각류 등을 제외한 전용 시설. 그 외 원재료는 공유 장비로 가공될 수 있음. 다른 상품의 토마토 추출물 사용을 확인했으며 토마토 제조환경으로 반영.",
+    "sourceName": "MadeGood 미국 공식 상품 페이지 · 제조사 알레르기 FAQ",
+    "sourceUrl": "https://www.madegoodfoods.com/products/mixed-berry-granola-bars",
+    "labelUrl": "https://www.madegoodfoods.com/products/mixed-berry-granola-bars",
+    "facilitySourceUrl": "https://madegoodfoods.zendesk.com/hc/en-us/articles/16944156618011-I-have-food-sensitivities-not-included-in-the-Top-9-Can-I-still-enjoy-MadeGood-snacks",
+    "sourceScope": "미국 공식 페이지의 1개/1봉 24g 정보. 국내 판매·수입 라벨은 미확인입니다. 제조사 Top 9 제외 안내 범위 밖의 제조환경은 미확인으로 구분합니다.",
+    "facilityIngredientSourceUrl": "https://www.madegoodfoods.com/products/chocolate-chip-granola-bars",
+    "wheatEvidence": "원재료의 밀 미사용과 제조사 FAQ의 밀 제외 전용 시설 안내를 확인했습니다. 실물 검사나 밀 0% 인증을 뜻하지 않습니다."
+  },
+  {
+    "id": "real-madegood-strawberry-bites-24",
+    "name": "MadeGood 딸기 그래놀라 바이트 24g (미국 표시)",
+    "manufacturer": "MadeGood",
+    "category": "과자",
+    "verificationStatus": "VERIFIED",
+    "directStatus": "REVIEWED",
+    "facilityStatus": "REVIEWED",
+    "checkedAt": "2026-10-10",
+    "direct": [],
+    "facility": [
+      "토마토"
+    ],
+    "facilityUnknown": [
+      "메밀",
+      "돼지고기",
+      "복숭아",
+      "아황산류",
+      "닭고기",
+      "쇠고기",
+      "오징어",
+      "조개류"
+    ],
+    "ingredients": "Pure Gluten Free Oats*, Cane Sugar*, Dried Strawberries* (Strawberries*, Apple Juice Concentrate*, Rice Flour*, Sunflower Oil*), Dried Apple*, Sunflower Oil*, Invert Cane Syrup*, Brown Rice Crisps* (Brown Rice Flour*, Brown Rice Syrup*, Sea Salt), Inulin*, Tapioca Starch*, Natural Flavor*, Vegetable Extracts (Shiitake Mushroom, Spinach, Beet, Broccoli). *Organic.",
+    "ingredientsIsSummary": false,
+    "directLabel": "확인한 원재료 목록에 19개 등록 항목 표시 없음 · 제조사는 밀 제외 안내 제공",
+    "facilityLabel": "제조사 FAQ: 밀·우유·난류·대두·땅콩·견과류·생선·갑각류 등을 제외한 전용 시설. 그 외 원재료는 공유 장비로 가공될 수 있음. 다른 상품의 토마토 추출물 사용을 확인했으며 토마토 제조환경으로 반영.",
+    "sourceName": "MadeGood 미국 공식 상품 페이지 · 제조사 알레르기 FAQ",
+    "sourceUrl": "https://www.madegoodfoods.com/products/strawberry-granola-bites",
+    "labelUrl": "https://www.madegoodfoods.com/products/strawberry-granola-bites",
+    "facilitySourceUrl": "https://madegoodfoods.zendesk.com/hc/en-us/articles/16944156618011-I-have-food-sensitivities-not-included-in-the-Top-9-Can-I-still-enjoy-MadeGood-snacks",
+    "sourceScope": "미국 공식 페이지의 1개/1봉 24g 정보. 국내 판매·수입 라벨은 미확인입니다. 제조사 Top 9 제외 안내 범위 밖의 제조환경은 미확인으로 구분합니다.",
+    "facilityIngredientSourceUrl": "https://www.madegoodfoods.com/products/chocolate-chip-granola-bars",
+    "wheatEvidence": "원재료의 밀 미사용과 제조사 FAQ의 밀 제외 전용 시설 안내를 확인했습니다. 실물 검사나 밀 0% 인증을 뜻하지 않습니다."
   }
 ];

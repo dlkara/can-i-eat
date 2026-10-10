@@ -7,7 +7,7 @@ const { chromium } = require('/Users/hjlee/.cache/codex-runtimes/codex-primary-r
 const base = 'http://127.0.0.1:4173/';
 const allergens = ['난류','우유','메밀','땅콩','대두','밀','고등어','게','새우','돼지고기','복숭아','토마토','아황산류','호두','닭고기','쇠고기','오징어','조개류','잣'];
 const allKnown = [...allergens.map((_,i)=>`test-direct-${i}`),'test-facility-wheat','test-facility-shrimp'];
-const realIds=['p01','p02','p03','real-sun-48','real-turtle-49','real-ohgamja-35','real-shrimp-90','real-potatosnack-250','real-honeytwist-300','real-spicyshrimp-400','real-squid-260','real-jagalchi-300','real-ricesnack-320','real-postick-280','real-doctor-energy-40','real-doctor-protein-50','real-chocopie-468','real-pocari-1500','real-barley-500','real-selex-nuts-50'];
+const realIds=['p01','p02','p03','real-sun-48','real-turtle-49','real-ohgamja-35','real-shrimp-90','real-potatosnack-250','real-honeytwist-300','real-spicyshrimp-400','real-squid-260','real-jagalchi-300','real-ricesnack-320','real-postick-280','real-doctor-energy-40','real-doctor-protein-50','real-chocopie-468','real-pocari-1500','real-barley-500','real-selex-nuts-50','real-madegood-choc-bar-24','real-madegood-berry-bar-24','real-madegood-strawberry-bites-24'];
 const key = 'meogeodoDwaePrototypeV3';
 const checks = [], errors = [];
 function check(name, actual, expected) { assert.deepEqual(actual, expected, name); checks.push(name); }
@@ -43,7 +43,7 @@ try {
   await go('home');
   check('실제 상품 추천: 미확인 2개 제외',await fullRecommendationIds(),realIds.filter(id=>!['p01','real-pocari-1500'].includes(id)).sort());
   await go('all-products');
-  check('실제 상품 20개',await page.locator('.product-list [data-product]').count(),20);
+  check('실제 상품 23개',await page.locator('.product-list [data-product]').count(),23);
   check('제조환경 미확인 2개',await page.locator('.badge.unknown').count(),2);
   await page.locator('[data-product="p03"]').click();
   await page.getByRole('heading',{name:'제품 근거·상세',exact:true}).waitFor();
