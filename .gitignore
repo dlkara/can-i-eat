@@ -1,3 +1,6 @@
 artifacts/qa/
 .sites-runtime/
 node_modules/
+
+# Generated concept originals stay local; selected site assets live in dist/assets.
+output/imagegen/
