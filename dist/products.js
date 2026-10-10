@@ -804,5 +804,53 @@ const PRODUCTS=[
     "sourceScope": "미국 공식 페이지의 1개/1봉 24g 정보. 국내 판매·수입 라벨은 미확인입니다. 제조사 Top 9 제외 안내 범위 밖의 제조환경은 미확인으로 구분합니다.",
     "facilityIngredientSourceUrl": "https://www.madegoodfoods.com/products/chocolate-chip-granola-bars",
     "wheatEvidence": "원재료의 밀 미사용과 제조사 FAQ의 밀 제외 전용 시설 안내를 확인했습니다. 실물 검사나 밀 0% 인증을 뜻하지 않습니다."
+  },
+  {
+    "category": "과자",
+    "verificationStatus": "VERIFIED",
+    "directStatus": "REVIEWED",
+    "facilityStatus": "REVIEWED",
+    "checkedAt": "2026-10-10",
+    "sourceName": "컬리 상품 상세 · 상품정보 이미지",
+    "id": "real-itsbetter-mango-30",
+    "manufacturer": "잇츠베러",
+    "name": "잇츠베러 코코넛칩 망고 30g",
+    "direct": [
+      "대두"
+    ],
+    "facility": [
+      "아황산류"
+    ],
+    "ingredients": "코코넛 과육(태국), 코코넛밀크분말(태국), 코코넛슈가시럽(태국), 코코넛칩(태국), 망고퓨레(태국), 대두분말(백태/국산), 변성전분, 스테비올배당체(감미료), 구연산, 향료",
+    "ingredientsIsSummary": false,
+    "directLabel": "대두 함유",
+    "facilityLabel": "본 제품은 이산화황을 사용한 제품과 같은 제조시설에서 제조하고 있습니다.",
+    "sourceUrl": "https://www.kurly.com/goods/1001973430",
+    "labelUrl": "https://product-image.kurly.com/hdims/resize/%3E1010x/quality/90/src/product/image/22454563-0b58-4e32-b17f-7d128a6cb2c1.jpg",
+    "sourceScope": "3종 중 망고 30g · 표시 제품명 잇츠베러 망고칩 · 제조원 Thai Fine Foods (TFF) Co., LTD., 태국 · 원재료 및 명시된 제조환경 목록에 밀·복숭아가 기재되지 않은 표시 기록이며 무함유 인증은 아닙니다."
+  },
+  {
+    "category": "과자",
+    "verificationStatus": "VERIFIED",
+    "directStatus": "REVIEWED",
+    "facilityStatus": "REVIEWED",
+    "checkedAt": "2026-10-10",
+    "sourceName": "컬리 상품 상세 · 상품정보 이미지",
+    "id": "real-itsbetter-blackrice-30",
+    "manufacturer": "잇츠베러",
+    "name": "잇츠베러 코코넛칩 흑미찹쌀 30g",
+    "direct": [
+      "대두"
+    ],
+    "facility": [
+      "아황산류"
+    ],
+    "ingredients": "코코넛 과육(태국), 코코넛밀크분말(태국), 코코넛슈가시럽(태국), 코코넛칩(태국), 흑미찹쌀분말(태국), 대두분말(백태/국산), 변성전분, 스테비올배당체(감미료), 향료",
+    "ingredientsIsSummary": false,
+    "directLabel": "대두 함유",
+    "facilityLabel": "본 제품은 이산화황을 사용한 제품과 같은 제조시설에서 제조하고 있습니다.",
+    "sourceUrl": "https://www.kurly.com/goods/1001973430",
+    "labelUrl": "https://product-image.kurly.com/hdims/resize/%3E1010x/quality/90/src/product/image/ecb7625f-bfd7-4179-93e5-191dd2c4ead4.jpg",
+    "sourceScope": "3종 중 흑미찹쌀 30g · 표시 제품명 잇츠베러 흑미찹쌀칩 · 제조원 Thai Fine Foods (TFF) Co., LTD., 태국 · 원재료 및 명시된 제조환경 목록에 밀·복숭아가 기재되지 않은 표시 기록이며 무함유 인증은 아닙니다."
   }
 ];
